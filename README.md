@@ -53,10 +53,6 @@ Kali Linux (Attacker) → Windows 11 Endpoint → Sysmon → Splunk Universal Fo
 ![msfvenom Attempt 1](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20kali-msfvenom-attempt1.png)
 > First attempt at generating a reverse TCP payload — syntax error due to incorrect flag format (`lhost` vs `LHOST`).
 
-## Step 3 – Payload Generation with msfvenom (Attempt 2)
-![msfvenom Attempt 2](screenshots/kali-msfvenom-attempt2.png)
-> Second attempt — error due to invalid type flag. Corrected on next attempt.
-
 ## Step 4 – Successful Payload Generation
 ![msfvenom Success](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20kali-msfvenom-success.png)
 > Successfully generated a Windows x64 Meterpreter reverse TCP payload saved as `resume.pdf.exe` (7680 bytes).
@@ -94,7 +90,7 @@ Kali Linux (Attacker) → Windows 11 Endpoint → Sysmon → Splunk Universal Fo
 > Filtered Splunk search for EventCode `4798` — 130 events detected. This event indicates a user's local group membership was enumerated, a common post-exploitation recon technique.
 
 ## Sysmon Telemetry – index=endpoint (497 Events)
-![Sysmon Events]([screenshots/splunk-sysmon-events.png](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20splunk-sysmon-events.png))
+![Sysmon Events](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20splunk-sysmon-events.png))
 > `index=endpoint` search returning 497 Sysmon events. Raw XML telemetry visible, including process GUIDs, hashes (MD5, SHA256, IMPHASH), and parent process chains originating from Splunk and powershell.exe.
 
 ## C2 Beacon Detected – Outbound Connection to 192.168.20.11
