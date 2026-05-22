@@ -34,11 +34,11 @@ Kali Linux (Attacker) → Windows 11 Endpoint → Sysmon → Splunk Universal Fo
 # Lab Setup & Configuration
 
 ## Splunk Universal Forwarder – inputs.conf & Splunkd Service
-![Splunk Forwarder Config][(screenshots/screenshots/Screenshot splunk-forwarder-config.png)]
+![Splunk Forwarder Config](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20splunk-forwarder-config.png)
 > `inputs.conf` configured to forward Sysmon, Defender, PowerShell, Security, Application, and System logs. Splunkd service confirmed running.
 
 ## Splunk Endpoint Index Created
-![Splunk Endpoint Index](screenshots/splunk-endpoint-index.png)
+![Splunk Endpoint Index](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20splunk-endpoint-index.png)
 > The `endpoint` index is active in Splunk Enterprise, ready to receive forwarded telemetry from the Windows host.
 
 ---
@@ -46,11 +46,11 @@ Kali Linux (Attacker) → Windows 11 Endpoint → Sysmon → Splunk Universal Fo
 # Attack Simulation – Kali Linux
 
 ## Step 1 – Nmap Reconnaissance Scan
-![Kali Nmap Scan](screenshots/kali-nmap-scan.png)
+![Kali Nmap Scan](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20kali-nmap-scan.png)
 > Aggressive Nmap scan (`-A -Pn`) against the Windows target `192.168.20.10`. Discovered open ports including 135 (RPC), 139 (NetBIOS), 445 (SMB), and 8000/8089 (Splunk).
 
 ## Step 2 – Payload Generation with msfvenom (Attempt 1)
-![msfvenom Attempt 1](screenshots/kali-msfvenom-attempt1.png)
+![msfvenom Attempt 1](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20kali-msfvenom-attempt1.png)
 > First attempt at generating a reverse TCP payload — syntax error due to incorrect flag format (`lhost` vs `LHOST`).
 
 ## Step 3 – Payload Generation with msfvenom (Attempt 2)
@@ -58,7 +58,7 @@ Kali Linux (Attacker) → Windows 11 Endpoint → Sysmon → Splunk Universal Fo
 > Second attempt — error due to invalid type flag. Corrected on next attempt.
 
 ## Step 4 – Successful Payload Generation
-![msfvenom Success](screenshots/kali-msfvenom-success.png)
+![msfvenom Success](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20kali-msfvenom-success.png)
 > Successfully generated a Windows x64 Meterpreter reverse TCP payload saved as `resume.pdf.exe` (7680 bytes).
 
 ## Step 5 – Payload Confirmed on Attacker Machine
@@ -66,7 +66,7 @@ Kali Linux (Attacker) → Windows 11 Endpoint → Sysmon → Splunk Universal Fo
 > `ls` confirms `resume.pdf.exe` exists in the attacker's home directory, ready for delivery.
 
 ## Step 6 – Metasploit Listener & Python HTTP Server
-![MSF Listener](screenshots/kali-msf-listener.png)
+![MSF Listener](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20kali-msf-listener.png)
 > Metasploit `multi/handler` configured with `LHOST=192.168.20.11` and `LPORT=4444`. Python HTTP server started on port 9999 to serve the payload to the victim machine.
 
 ---
