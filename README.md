@@ -34,7 +34,7 @@ Kali Linux (Attacker) → Windows 11 Endpoint → Sysmon → Splunk Universal Fo
 # Lab Setup & Configuration
 
 ## Splunk Universal Forwarder – inputs.conf & Splunkd Service
-![Splunk Forwarder Config](screenshots/screenshots/Screenshot splunk-forwarder-config.png)
+![Splunk Forwarder Config][(screenshots/screenshots/Screenshot splunk-forwarder-config.png)]
 > `inputs.conf` configured to forward Sysmon, Defender, PowerShell, Security, Application, and System logs. Splunkd service confirmed running.
 
 ## Splunk Endpoint Index Created
