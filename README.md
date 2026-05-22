@@ -62,7 +62,7 @@ Kali Linux (Attacker) → Windows 11 Endpoint → Sysmon → Splunk Universal Fo
 > Successfully generated a Windows x64 Meterpreter reverse TCP payload saved as `resume.pdf.exe` (7680 bytes).
 
 ## Step 5 – Payload Confirmed on Attacker Machine
-![Payload Confirmed](screenshots/kali-payload-confirmed.png)
+![Payload Confirmed](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20kali-payload-confirmed.png)
 > `ls` confirms `resume.pdf.exe` exists in the attacker's home directory, ready for delivery.
 
 ## Step 6 – Metasploit Listener & Python HTTP Server
@@ -74,11 +74,11 @@ Kali Linux (Attacker) → Windows 11 Endpoint → Sysmon → Splunk Universal Fo
 # Payload Execution – Victim Machine (Windows 11)
 
 ## Payload Running in Task Manager
-![Victim Payload Running](screenshots/victim-payload-running.png)
+![Victim Payload Running](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20victim-payload-running.png)
 > Windows Task Manager showing `resume.pdf.exe` running as a background process on the victim machine, confirming successful execution.
 
 ## Post-Exploitation – Meterpreter Shell
-![Meterpreter Post-Exploit](screenshots/meterpreter-post-exploit.png)
+![Meterpreter Post-Exploit](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20meterpreter-post-exploit.png)
 > Active Meterpreter session — attacker ran `net localgroup` (enumerating local groups) and `ipconfig` (confirming victim IP `192.168.20.10`) for situational awareness.
 
 ---
@@ -86,23 +86,23 @@ Kali Linux (Attacker) → Windows 11 Endpoint → Sysmon → Splunk Universal Fo
 # Detection & Analysis – Splunk
 
 ## Splunk Log Ingestion – Multi-Source Events
-![Splunk Log Ingestion](screenshots/splunk-log-ingestion.png)
+![Splunk Log Ingestion](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/screenshots.splunk-log-ingestion.png)
 > Splunk successfully ingesting Windows event logs from multiple sources including Security, Application, and System logs from host `ukim`.
 
 ## EventCode 4798 – Local Group Membership Enumeration
-![Event 4798 Filter](screenshots/splunk-event4798-filter.png)
+![Event 4798 Filter](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20splunk-event4798-filter..png)
 > Filtered Splunk search for EventCode `4798` — 130 events detected. This event indicates a user's local group membership was enumerated, a common post-exploitation recon technique.
 
 ## Sysmon Telemetry – index=endpoint (497 Events)
-![Sysmon Events](screenshots/splunk-sysmon-events.png)
+![Sysmon Events]([screenshots/splunk-sysmon-events.png](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20splunk-sysmon-events.png))
 > `index=endpoint` search returning 497 Sysmon events. Raw XML telemetry visible, including process GUIDs, hashes (MD5, SHA256, IMPHASH), and parent process chains originating from Splunk and powershell.exe.
 
 ## C2 Beacon Detected – Outbound Connection to 192.168.20.11
-![C2 Detection](screenshots/splunk-c2-detection.png)
+![C2 Detection](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20splunk-c2-detection.png)
 > Sysmon network connection events showing the victim (`192.168.20.10`) making outbound connections to the attacker's C2 server at `192.168.20.11:4444`. The source process is identified as `Resume.pdf (2).exe` — confirming the C2 callback.
 
 ## Payload Artifact – Resume.pdf.exe (31 Events)
-![Payload Artifact](screenshots/splunk-payload-artifact.png)
+![Payload Artifact](https://github.com/Tajay49/SOC-Home-Lab/blob/7ff81a1ed89bf305c4b6ef1fa8a10b95b22f4c3b/screenshots/screenshots/Screenshot%20splunk-payload-artifact.png)
 > 31 Sysmon events tied to `Resume.pdf.exe`. Events include file creation with Zone.Identifier metadata (downloaded from the internet), confirming the payload was fetched from the attacker's HTTP server at `http://192.168.20.11:9999/`.
 
 ---
